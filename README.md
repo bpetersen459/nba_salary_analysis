@@ -1,23 +1,27 @@
 # NBA Salary Analysis — 2025
 
-A Python data-analysis project examining how NBA player performance, age, and position relate to 2025 player salary. The project cleans and merges salary and player-statistics data, fits nine OLS regression models, compares model performance, and produces exploratory and diagnostic visualizations.
+A Python data-analysis project examining how NBA player performance, age, and position relate to 2025 NBA player salary. The project cleans and merges salary and player-statistics data, fits nine OLS regression models, compares model performance, and produces exploratory and diagnostic visualizations.
 
 ## Project Questions
 
-- How strongly are individual box-score statistics associated with player salary?
-- Does combining scoring, rebounding, playmaking, defense, age, and position improve salary prediction?
-- Does log-transforming salary produce a better-behaved regression model?
-- Which model provides the strongest fit among the specifications tested?
+* How strongly are individual box-score statistics associated with player salary?
+* Does combining scoring, rebounding, playmaking, defense, age, and position improve salary prediction?
+* Does log-transforming salary produce a better-behaved regression model?
+* Which model provides the strongest fit among the specifications tested?
+
+## Key Result
+
+Among the raw-salary models tested, Model 8 — box score statistics plus age and position — produced the strongest fit, with an adjusted R² of approximately 0.643. This suggests that salary differences are better explained by a combination of player production and contextual characteristics than by any single performance statistic.
 
 ## Features
 
-- Cleans and merges NBA salary and player-statistics datasets
-- Converts salary strings into numeric values for modeling
-- Fits nine regression models using `statsmodels`
-- Compares R², adjusted R², AIC, and BIC
-- Generates salary distributions, correlation analysis, regression plots, and residual diagnostics
-- Saves processed data and model output automatically
-- Uses repository-relative paths, so the project works after cloning in VS Code or another IDE
+* Cleans and merges NBA salary and player-statistics datasets
+* Converts salary strings into numeric values for modeling
+* Fits nine regression models using `statsmodels`
+* Compares R², adjusted R², AIC, and BIC
+* Generates salary distributions, correlation analysis, regression plots, and residual diagnostics
+* Saves processed data and model output automatically
+* Uses repository-relative paths so the project can be cloned and run on another machine without manually changing file paths
 
 ## Project Structure
 
@@ -67,11 +71,13 @@ python -m venv .venv
 4. Activate it.
 
 **Windows PowerShell**
+
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
 **macOS/Linux**
+
 ```bash
 source .venv/bin/activate
 ```
@@ -79,7 +85,7 @@ source .venv/bin/activate
 5. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 6. Run the analysis:
@@ -101,7 +107,3 @@ Python, pandas, NumPy, statsmodels, Matplotlib, Seaborn, and openpyxl.
 ## Interpretation Note
 
 Model 8 has the highest adjusted R² among the models that predict salary on its original dollar scale. Model 9 predicts log salary, so its AIC/BIC values should not be directly compared with the raw-salary models because the response variable is on a different scale.
-
-## Data Note
-
-The repository contains the two raw CSV files used in the submitted analysis. If you publish this publicly, add the original data-source URLs/citations to this README if you have them.
