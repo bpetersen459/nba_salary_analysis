@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA Salary Analysis | 2025-26</title>
+  <style>
+    :root { --bg:#0b1020; --panel:#131a2b; --text:#eef2ff; --muted:#a9b3c9; --accent:#7dd3fc; --border:#26324a; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+    a { color:var(--accent); }
+    .wrap { width:min(1120px,92%); margin:auto; }
+    header { padding:72px 0 42px; }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.12em; font-weight:700; font-size:.8rem; }
+    h1 { font-size:clamp(2.4rem,6vw,4.8rem); line-height:1.05; margin:.25rem 0 1rem; }
+    h2 { margin-top:0; font-size:1.8rem; }
+    .lede { max-width:760px; color:var(--muted); font-size:1.15rem; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0 52px; }
+    .card,.section { background:var(--panel); border:1px solid var(--border); border-radius:18px; }
+    .card { padding:22px; }
+    .metric { font-size:2rem; font-weight:800; }
+    .label { color:var(--muted); font-size:.92rem; }
+    .section { padding:28px; margin:0 0 24px; }
+    .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    figure { margin:0; background:#fff; border-radius:14px; overflow:hidden; }
+    figure img { width:100%; display:block; }
+    figcaption { background:var(--panel); color:var(--muted); padding:10px 12px; font-size:.9rem; }
+    table { width:100%; border-collapse:collapse; font-size:.92rem; }
+    th,td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--border); }
+    th { color:var(--accent); }
+    code { background:#0a0e19; padding:.15rem .35rem; border-radius:6px; }
+    footer { color:var(--muted); padding:34px 0 50px; text-align:center; }
+    @media (max-width:800px){ .cards,.grid{grid-template-columns:1fr;} .section{padding:20px;} table{font-size:.78rem;} }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="eyebrow">Python · Regression · Data Visualization</div>
+    <h1>NBA Salary Analysis</h1>
+    <p class="lede">An analysis of the relationship between NBA player performance, age, position, and 2025-26 salary using nine ordinary least squares regression specifications.</p>
+    <div class="cards">
+      <div class="card"><div class="metric">693</div><div class="label">Merged player-stat rows analyzed</div></div>
+      <div class="card"><div class="metric">9</div><div class="label">Regression specifications compared</div></div>
+      <div class="card"><div class="metric">0.643</div><div class="label">Best raw-salary adjusted R²</div></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="section">
+      <h2>Project Overview</h2>
+      <p>The project merges NBA salary data with player statistics using a player identifier, cleans salary fields, creates a log-salary variable, and evaluates models ranging from single-stat baselines to a broader specification containing box-score production, age, and position.</p>
+      <p>The strongest raw-salary model is <strong>Model 8: Box Score + Age + Position</strong>, with an adjusted R² of about <strong>0.643</strong>. Points alone also explain a substantial portion of salary variation, while the efficiency-only specification is much weaker.</p>
+    </section>
+
+    <section class="section">
+      <h2>Model Comparison</h2>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Model</th><th>Response</th><th>R²</th><th>Adj. R²</th></tr></thead>
+        <tbody>
+          <tr><td>Box Score + Age + Position</td><td>Salary</td><td>0.649</td><td>0.643</td></tr>
+          <tr><td>Offensive Production</td><td>Salary</td><td>0.577</td><td>0.572</td></tr>
+          <tr><td>Box Score</td><td>Salary</td><td>0.573</td><td>0.570</td></tr>
+          <tr><td>Points Only</td><td>Salary</td><td>0.563</td><td>0.562</td></tr>
+          <tr><td>Log Salary + Box Score + Age + Position</td><td>Log Salary</td><td>0.429</td><td>0.421</td></tr>
+          <tr><td>Assists Only</td><td>Salary</td><td>0.348</td><td>0.347</td></tr>
+          <tr><td>Defense/Rebounding</td><td>Salary</td><td>0.291</td><td>0.288</td></tr>
+          <tr><td>Rebounds Only</td><td>Salary</td><td>0.154</td><td>0.153</td></tr>
+          <tr><td>Efficiency Only</td><td>Salary</td><td>0.058</td><td>0.052</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="label">Note: information criteria such as AIC/BIC should be compared only among models with the same response variable; the log-salary model uses a different response scale.</p>
+    </section>
+
+    <section class="section">
+      <h2>Key Visualizations</h2>
+      <div class="grid">
+        <figure><img src="outputs/figures/salary_distribution.png" alt="Salary distribution"><figcaption>Distribution of 2025-26 NBA salaries</figcaption></figure>
+        <figure><img src="outputs/figures/correlation_heatmap.png" alt="Correlation heatmap"><figcaption>Correlation matrix for salary and player statistics</figcaption></figure>
+        <figure><img src="outputs/figures/model_comparison_adjusted_r_squared.png" alt="Model comparison"><figcaption>Model comparison by adjusted R²</figcaption></figure>
+        <figure><img src="outputs/figures/observed_vs_predicted_context_model.png" alt="Observed versus predicted salary"><figcaption>Observed vs. predicted salary for the context model</figcaption></figure>
+        <figure><img src="outputs/figures/residuals_vs_fitted_context_model.png" alt="Residual plot"><figcaption>Residual diagnostics for the context model</figcaption></figure>
+        <figure><img src="outputs/figures/qq_plot_context_model.png" alt="Q-Q plot"><figcaption>Q-Q plot of context-model residuals</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Repository</h2>
+      <p>Run the entire analysis from the repository root with <code>python main.py</code>. The script reads the raw files from <code>data/raw/</code> and automatically writes processed datasets, regression summaries, model comparisons, and figures to their corresponding output folders.</p>
+    </section>
+  </main>
+  <footer class="wrap">NBA Salary Analysis · Reproducible Python project</footer>
+</body>
+</html>

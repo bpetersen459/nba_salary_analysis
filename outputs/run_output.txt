@@ -1,0 +1,15 @@
+Analysis complete: 693 merged player-season rows
+
+Model comparison (sorted by adjusted R-squared):
+                                           Model Response_Variable  R_squared  Adjusted_R_squared          AIC          BIC
+             Model 8: Box Score + Age + Position       Salary_2025   0.648521            0.643360 23875.818591 23925.754036
+                   Model 5: Offensive Production       Salary_2025   0.576664            0.572332 23998.542316 24034.859004
+                              Model 4: Box Score       Salary_2025   0.572949            0.569837 24000.587745 24027.825261
+                            Model 1: Points Only       Salary_2025   0.562632            0.561998 24009.108027 24018.187199
+Model 9: Log Salary + Box Score + Age + Position   Log_Salary_2025   0.428922            0.420536  2180.844180  2230.779625
+                           Model 2: Assists Only       Salary_2025   0.347952            0.347007 24285.453364 24294.532536
+                     Model 6: Defense/Rebounding       Salary_2025   0.290612            0.287519 24347.777829 24365.936173
+                          Model 3: Rebounds Only       Salary_2025   0.154222            0.152996 24465.468928 24474.548100
+                        Model 7: Efficiency Only       Salary_2025   0.058384            0.052280 22092.728738 22114.893438
+
+Outputs saved to: /mnt/data/nba_salary_analysis/outputs
